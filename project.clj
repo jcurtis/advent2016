@@ -6,4 +6,7 @@
   :dependencies [[org.clojure/clojure "1.8.0"]]
   :main ^:skip-aot advent2016.core
   :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}})
+  :profiles {:uberjar {:aot :all}}
+  :test-refresh {
+                  :changes-only true
+                  :notify-command ["terminal-notifier" "-title" "Advent 2016 Tests" "-message"]})
