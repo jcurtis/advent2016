@@ -1950,10 +1950,18 @@
 202 402 602
 203 403 603")
 
-; (deftest split-block-test
-;   (testing "split-block"
-;     (println (split-block shortinput2))))
+(deftest split-into-threes-test
+  (testing "split-into-threes"
+    (println "split-into-threes shortinput2")
+    (println (split-into-threes (tokenize shortinput2)))))
 
-; (deftest read-block-test
-;   (testing "read-block"
-;     (is (=))))
+(deftest transpose-test
+  (testing "transpose"
+    (println "transpose shortinput2")
+    (println (map transpose (split-into-threes (tokenize shortinput2))))))
+
+(deftest solve-test
+  (testing "solve"
+    (println "solve")
+    (println (solve shortinput2))
+    (println (solve input1))))

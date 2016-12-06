@@ -30,16 +30,22 @@
 
 (defn split-into-threes
   [lines]
-  (if (> (count lines) 3)
-    (take 3)
-    (split-into-threes)))
+  (partition 3 lines))
 
-;
-; (reduce)
-;
-; (defn split-block
-;   [input]
-;   (let [lines (str/split-lines input)]
-;     (dotime [i 3]
-;       (lines i))))
-;
+(defn transpose
+  [block]
+  (let [[a b c] block]
+    [
+      [(first a) (first b) (first c)]
+      [(second a) (second b) (second c)]
+      [(last a) (last b) (last c)]]))
+
+(defn solve
+  [input]
+  (count
+    (filter true?
+      (map isvalid
+        (partition 3
+          (flatten
+            (map transpose
+              (split-into-threes (tokenize input)))))))))
