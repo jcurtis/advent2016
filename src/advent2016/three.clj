@@ -28,10 +28,12 @@
   [input]
   (count (filter true? (analyze input))))
 
-; (defn split-into-threes
-;   [lines]
-;   (if (> (count lines) 3)
-;     ()))
+(defn split-into-threes
+  [lines]
+  (if (> (count lines) 3)
+    (take 3)
+    (split-into-threes)))
+
 ;
 ; (reduce)
 ;
@@ -40,4 +42,4 @@
 ;   (let [lines (str/split-lines input)]
 ;     (dotime [i 3]
 ;       (lines i))))
-;     
+;
