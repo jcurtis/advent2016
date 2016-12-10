@@ -5,7 +5,8 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [
                   [org.clojure/clojure "1.8.0"]
-                  [proto-repl "0.3.1"]]
+                  [proto-repl "0.3.1"]
+                  [org.clojure/tools.trace "0.7.9"]]
   :main ^:skip-aot advent2016.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}}
