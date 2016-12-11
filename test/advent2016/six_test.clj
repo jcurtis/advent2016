@@ -15,3 +15,8 @@
   (testing "frequest-letter"
     (is (= \e (frequent-letter [\a \b \e \c \e \a \e])))
     (is (= \z (frequent-letter [\z])))))
+
+(deftest solve2-test
+  (testing "solve 6 part 2"
+    (is (= "advent" (solve2 test-input)))
+    (println "solve2" (solve2 input))))
