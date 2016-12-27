@@ -18,7 +18,7 @@
   (testing "tls?"
     (is (true? (tls? "abba[mnop]qrst")))
     (is (false? (tls? "abcdl[zxcbddbrre]xyyx")))
-    (is (false? (tls? "aaaa[qwer]tyui")))
+    (is (nil? (tls? "aaaa[qwer]tyui")))
     (is (true? (tls? "ioxxoj[asdfgh]zxcvbn")))
     (is (true? (tls? "ioxxoj[asdfgh]zxcv[potato]bn")))
     (is (true? (tls? "uxpvoytxfazjjhi[qogwhtzmwxvjwxreuz]zduoybbzxigwggwu[lamifchqqwbphhsqnf]qrjdjwtnhsjqftnqsk[bsqinwypsnnvougrs]wfmhtjkysqffllakru")))
@@ -27,3 +27,10 @@
 (deftest solve1-test
   (testing "solve 7 part 1"
     (println "solve1:" (solve1 input))))
+
+(deftest ssl?-test
+  (testing "ssl?"
+    (is (true? (ssl? "aba[bab]xyz")))
+    (is (false? (ssl? "xyx[xyx]xyx")))
+    (is (true? (ssl? "aaa[kek]eke")))
+    (is (true? (ssl? "zazbz[bzb]cdb")))))

@@ -38,3 +38,27 @@
 (defn solve1
   [input]
   (count (filter true? (map tls? (str/split-lines input)))))
+
+(defn find-aba
+  [input]
+  (map first (re-seq #"([a-z])[a-z]\1" input)))
+
+(defn invert
+  [aba]
+  (str (second aba) (first aba) (second aba)))
+
+(defn not-empty? [x] (not (empty? x)))
+
+(defn filter-abas
+  [list]
+  (flatten (filter not-empty? (map find-aba list))))
+
+(defn ssl?
+  [input]
+  (let [abas (filter-abas (find-standard input))
+        hyper (find-hyper input)]
+    (do
+      (println "abas" abas)
+      (filter (fn [aba]
+               (some #(str/index-of (invert aba) %) hyper))
+        abas))))
