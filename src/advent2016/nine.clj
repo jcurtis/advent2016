@@ -2,7 +2,6 @@
   (:require [clojure.string :as str]
             [advent2016.util :as util]))
 
-
 (defn rest-str
   [input marker length]
   (let [substr (+ (str/index-of input marker) length (count marker))]
@@ -27,14 +26,35 @@
   (loop [counter 0
          input (remove-whitespace compressed)]
       (let [marker (next-marker input)]
-        (do (println "counter" counter "rest input size" (count input) "marker" marker)
+        ; (do (println "counter" counter "rest input size" (count input) "marker" marker)
           (if (= 0 (count marker))
             (+ counter (count input))
             (let [[m l r] marker]
                 (recur
                   (+ (str/index-of input m) counter (str-mult l r))
-                  (rest-str input m (util/parse-int l)))))))))
+                  (rest-str input m (util/parse-int l))))))))
 
 
 (def input (slurp "src/advent2016/input/nine.txt"))
 ; (solve1 input)
+
+(defn solve2
+  [compressed]
+  (loop [counter 0
+         input (remove-whitespace compressed)]
+      (let [marker (next-marker input)]
+        (if (= 0 (count marker))
+          (+ counter (count input))
+          (let [[m l r] marker
+                idx (str/index-of input m)]
+              (recur
+                (+
+                  idx
+                  counter
+                  (*
+                    (let [afterm (+ idx (count m))]
+                      (solve2 (.substring input afterm (+ afterm (util/parse-int l)))))
+                    (util/parse-int r)))
+                (rest-str input m (util/parse-int l))))))))
+
+; (solve2 input)
