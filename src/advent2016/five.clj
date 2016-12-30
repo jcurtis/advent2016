@@ -1,17 +1,6 @@
 (ns advent2016.five
-  (:import
-        [java.security MessageDigest]
-        [java.math BigInteger])
   (:require
         [advent2016.util :as util]))
-
-(defn md5 [s]
-  (let [algorithm (MessageDigest/getInstance "MD5")
-        size (* 2 (.getDigestLength algorithm))
-        raw (.digest algorithm (.getBytes s))
-        sig (.toString (BigInteger. 1 raw) 16)
-        padding (apply str (repeat (- size (count sig)) "0"))]
-    (str padding sig)))
 
 (defn is-valid
   [hash]
@@ -20,7 +9,7 @@
 (defn next-hash
   [input x]
   (loop [n x]
-    (let [hash (md5 (str input n))]
+    (let [hash (util/md5 (str input n))]
       (if (is-valid hash)
         {:count n :hash hash}
         (recur (inc n))))))
